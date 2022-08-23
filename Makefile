@@ -29,9 +29,10 @@ STRIP= strip
 # Directories where the sources can be found
 LUA= lua-5.4.3
 LUALZMA= lualzma-0.16
-LUALINUX=lualinux-0.3
-LUAMONO=luamonocypher-0.3
-SRLUA=srlua-102
+LUALINUX= lualinux-0.3
+LUAMONO= luamonocypher-0.3
+SRLUA= srlua-102
+LUALPEG= lpeg-1.0.2
 
 CFLAGS= -Os -Isrc/$(LUA)/src  -DLUA_USE_LINUX
 LDFLAGS= 
@@ -49,6 +50,7 @@ slua:
 	$(CC) -c $(CFLAGS) src/$(LUAMONO)/*.c
 	$(CC) -c $(CFLAGS) src/$(LUALINUX)/*.c
 	$(CC) -c $(CFLAGS) src/$(LUALZMA)/*.c
+	$(CC) -c $(CFLAGS) src/$(LUALPEG)/*.c
 	$(CC) -c $(CFLAGS)  -D_7ZIP_ST src/$(LUALZMA)/lzma/*.c
 	$(AR) rc slua.a *.o
 	$(CC) -static -o slua $(CFLAGS) $(LDFLAGS) src/slua.c slua.a
@@ -89,13 +91,14 @@ sglua:
 	strip ./sglua
 	./sglua  test/smoketest_g.lua
 	rm -f *.o *.a	
-	
+
 test:  ./slua
 	./slua test/test_lualzma.lua
 	./slua test/test_luamonocypher.lua
+	./slua test/test_lpeg.lua
 
 bin:  ./slua
 	cp ./slua ./bin/slua
-	
+
 .PHONY: clean smoketest default sglua
 

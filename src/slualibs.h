@@ -26,6 +26,11 @@
 	lua_pushcfunction(L, luaopen_linenoise);
 	lua_setfield(L, -2, "linenoise");
 	///
+	/// lpeg
+	int luaopen_lpeg(lua_State *L); 
+	lua_pushcfunction(L, luaopen_lpeg);
+	lua_setfield(L, -2, "lpeg");
+	///
 	/// remove _PRELOAD table
 	lua_pop(L, 1);
   
